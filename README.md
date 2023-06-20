@@ -39,3 +39,15 @@ We envision integrating a question rule base and back-chaining rules into the ex
 ## Conclusion
 
 This project demonstrates the value of rule-based expert systems in healthcare. With continued research and development, expert systems like the one presented here can significantly improve patient care and outcomes.
+
+## License
+
+This project is licensed under the terms of the [MIT License](./LICENSE).
+
+## Acknowledgements
+
+- We extend our sincere gratitude to [Seto et al., 2012](https://d1wqtxts1xzle7.cloudfront.net/53636536/Developing_healthcare_rule-based_expert_20170623-1911-623g2e-libre.pdf?1498223237=&response-content-disposition=inline%3B+filename%3DDeveloping_healthcare_rule_based_expert.pdf&Expires=1687232140&Signature=fUaxOkXdtLLMjAMvlChGYyUcCffuUxIpy95pbyUXabIsxKrcTqilvVvNmlUeqqKRgIGqAsq2jBk638vbwu7oy-cWgXdVLbdME3xqBXFDpYn~Xmt1akNm8Z35S099eEXc35CSRQvt~ZcaPcZr7~5DaaxLvsBk56Mz1uDvC~1F1iLOkC0xDIniHOMZnnG8VP4Hf~p3GG7UE8NbEcerM5sMEObFKdWsKL3ogsl6KZv2H-M6HARAX1ke3qWrzVpDwaRLipqU~uroYESjsj~x~1K9V1F8c3gkc3l6XW0DO3EnT~O9S9g4gXxkoVlG67Kw3ueC~rzlLWjSqPdMEaIew06BhQ__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) whose work on rule-based expert systems for heart failure telemonitoring inspired this project.
+- Thanks to the creators and maintainers of [Pyke](https://pyke.sourceforge.net/), the Python-based knowledge engine we've used in this project.
+
+
+
