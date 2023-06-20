@@ -8,37 +8,33 @@ The flowchart below illustrates the complexity of maintaining classical expert s
 
 ![Health Assessment Flowchart](uml/output/state-attempt-2/StateDiagram.png)
 
-## About the Project
+## Fact and Rule Bases
 
-The project is inspired by the research of Seto et al. (2012), which focused on a rule-based expert system designed for a heart failure telemonitoring system that operates via mobile phones. The study demonstrated significant improvements in self-care and clinical management of heart failure.
+Pyke rules consist of 'if' and 'then' segments, traditionally referred to as premises and conclusions. Pyke programs contain rule bases, repositories of rules stored in .krb files, while known facts are stored in .kfb files known as fact bases.
 
-This repository provides an implementation of a similar system, developed using Pyke. Pyke allows for the creation of an expert system (ES) that emulates the features of Prolog but is entirely crafted in Python.
+Here's a look at our fact and rule bases:
 
-## Pyke and Its Components
+- Fact Base: Contains known facts to inform the rule base.<br>
+  <img src="images/knowledge-fact-base.png" height="200">
 
-![Pyke Diagram](path-to-screenshot)
+- Rule Base: Houses the rules for decision making based on the facts from the fact base.
+  <img src="images/rule.png" height="200">
 
-Pyke rules consist of 'if' and 'then' segments, traditionally referred to as premises and conclusions. Pyke programs contain rule bases, repositories of rules stored in .krb files. A single rule base can contain both forward-chaining and backward-chaining rules, offering flexibility in the rule execution process.
+Our rule base includes several rulesets designed to monitor patient health. For example, the rule named `high_BMI_high_BP_abnormal_HR` checks for patients who are obese, have high blood pressure, and an abnormal heart rate. If a patient meets these conditions, the system generates a message advising them to contact their doctor or visit the emergency department.
 
-## Forward-Chaining in Pyke
+## Driver Code
 
-Forward-chaining, the method of reasoning used in inference engines, checks if any known facts match the 'if' clause of a rule. Pyke stores these facts in .kfb files, known as fact bases.
+Our driver code serves as the entry point for the application. This file contains the essential programming logic that initiates the expert system and facilitates the interaction between the rules and facts.<br>
+<img src="images/driver-code.png" width="700">
 
-## Analyzing the Rule Base
+## Program Execution
 
-This repository includes several rule sets designed to monitor patient health. For instance, the rule named `high_BMI_high_BP_abnormal_HR` checks for patients who are obese, have high blood pressure, and an abnormal heart rate. If a patient meets these conditions, the system generates a message advising them to contact their doctor or visit the emergency department.
-
-![Rule Example](path-to-screenshot)
-
-## Running the Program
-
-To execute the program, navigate to the directory of the driver.py file and run the command `python driver.py`. The program then outputs a domain-relevant recommendation based on the patient's vital signs, thereby enhancing the transparency of the expert system.
-
-![Program Execution](path-to-screenshot)
+Running the program is simple: navigate to the directory of the driver.py file and run the command `python driver.py`. The program then outputs a domain-relevant recommendation based on the patient's vital signs, thereby enhancing the transparency of the expert system.
+<img src="images/successful-program-execution.png" width="700">
 
 ## Future Development
 
-Integrating a question rule base and back-chaining rules into the ES could significantly enhance its functionality. The ES could ask targeted questions, enabling a more comprehensive and personalized analysis of each patient's health.
+We envision integrating a question rule base and back-chaining rules into the expert system to significantly enhance its functionality. This would allow the system to ask targeted questions, enabling a more comprehensive and personalized analysis of each patient's health.
 
 ## Conclusion
 
