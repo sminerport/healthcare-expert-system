@@ -1,0 +1,16 @@
+# questions.kqb
+
+name($name)
+     What is your name?
+     ---
+     $name = string(2-40)
+
+weight($weight)
+     What is your weight?
+     ---
+     $weight = integer(100-1000)
+
+height($height)
+     What is height (in inches)?:
+     --- 
+     $height = integer(50-96)

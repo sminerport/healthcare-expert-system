@@ -1,0 +1,31 @@
+@startuml
+start
+:Create knowledge engine;
+:Compile health goal;
+:Reset engine;
+:Activate 'fc_healthcare' in engine;
+:Iterate through generator from goal prove method;
+
+while (Each iteration of generator) is (yes)
+    :Process rules;
+    if (BMI rule is fired) then (yes)
+        :Process BMI Rule;
+    else (no)
+    endif
+
+    if (Blood Pressure rule is fired) then (yes)
+        :Process BP Rule;
+    else (no)
+    endif
+
+    :Output Results;
+endwhile
+
+if (Exception occurs) then (yes)
+    :Print traceback;
+    :Exit program;
+else (no)
+endif
+
+stop
+@enduml

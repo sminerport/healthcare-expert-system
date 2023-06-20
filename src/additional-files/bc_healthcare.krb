@@ -1,0 +1,19 @@
+#bc_healthcare.krb
+
+get_attributes
+     use get_attributes($name, $weight, $height)
+     when 
+          python engine.get_ke('questions', 'name').reset()
+          questions.name($name)
+          questions.weight($weight)
+          questions.height($height)
+
+get_weight
+     use get_weight($weight)
+     when
+          questions.weight($weight)
+ 
+get_height
+     use get_height($height)
+     when
+          questions.height($height)

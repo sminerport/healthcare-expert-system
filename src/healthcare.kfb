@@ -1,0 +1,6 @@
+# name #weight # height #systolic #diastolic #hr
+attributes_of(Amy, 110, 67, 111, 58, 72)
+attributes_of(Marco, 200, 60, 120, 80, 90)
+attributes_of(Theresa, 180, 77, 88, 70, 88)
+attributes_of(Alyson, 150, 69, 104, 72, 60)
+attributes_of(Reyna, 225, 65, 87, 65, 65)

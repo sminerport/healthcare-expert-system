@@ -1,0 +1,321 @@
+# fc_healthcare.krb
+
+attributes_of
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          $weight_km = $weight / 2.205
+          $height_m = $height / 39.37
+          $height_sq = $height_m * $height_m
+          $bmi = $weight_km / $height_sq
+     assert
+          healthcare.bmi_of($name, $bmi)
+          #python print "BMI for", $name + ":", $bmi
+
+low_BMI
+     foreach
+          healthcare.bmi_of($name, $bmi)
+          check $bmi < 18.5
+     assert
+          healthcare.underweight($name, True)
+          #python print "Underweight"
+
+normal_BMI
+     foreach
+          healthcare.bmi_of($name, $bmi)
+          check 18.5 <= $bmi < 25
+     assert
+          healthcare.normal_weight($name, True)
+          #python print "Healthy Weight"
+
+high_BMI
+     foreach
+          healthcare.bmi_of($name, $bmi)
+          check 25 <= $bmi
+     assert
+          healthcare.obese($name, True)
+          #python print "Obese"
+
+low_BMI_low_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.underweight($name, True) 
+          check ($systolic <= 90) | ($diastolic <= 60)
+     assert
+          healthcare.low_BP($name, True)
+          #python print "Underweight Low BP"
+
+low_BMI_normal_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.underweight($name, True)
+          check (90 < $systolic <= 120) & (60 < $diastolic <= 80)
+     assert
+          healthcare.normal_BP($name, True)
+          #python print "Underweight Normal BP"
+
+low_BMI_high_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.underweight($name, True)
+          check (120 < $systolic) | (80 < $diastolic)
+     assert
+          healthcare.high_BP($name, True)
+          #python print "Underweight High BP"
+
+normal_BMI_low_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_weight($name, True) 
+          check ($systolic <= 90) | ($diastolic <= 60)
+     assert
+          healthcare.low_BP($name, True)
+          #python print "normal_weight Low BP"
+
+normal_BMI_normal_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_weight($name, True)
+          check (90 < $systolic <= 120) & (60 < $diastolic <= 80)
+     assert
+          healthcare.normal_BP($name, True)
+          #python print "normal_weight Normal BP"
+
+normal_BMI_high_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_weight($name, True)
+          check (120 < $systolic) | (80 < $diastolic)
+     assert
+          healthcare.high_BP($name, True)
+          #python print "normal_weight High BP"
+
+high_BMI_low_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.obese($name, True) 
+          check ($systolic <= 90) | ($diastolic <= 60)
+     assert
+          healthcare.low_BP($name, True)
+          #python print "Obese Low BP"
+
+high_BMI_normal_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.obese($name, True)
+          check (90 < $systolic <= 120) & (60 < $diastolic <= 80)
+     assert
+          healthcare.normal_BP($name, True)
+          #python print "Obese Normal BP"
+
+high_BMI_high_BP
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.obese($name, True)
+          check (120 < $systolic) | (80 < $diastolic)
+     assert
+          healthcare.high_BP($name, True)
+          #python print "Obese High BP"
+
+#########################################################################################
+
+low_BMI_low_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.underweight($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+low_BMI_low_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.underweight($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+low_BMI_normal_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.underweight($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+low_BMI_normal_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.underweight($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+low_BMI_high_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.underweight($name, True)
+          healthcare.high_BP($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+low_BMI_high_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.underweight($name, True)
+          healthcare.high_BP($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #4: Contact the Heart Function Clinic or your family doctor."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+#########################################################################################
+
+normal_BMI_low_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #2: If you feel worse later today, use the system to take symptoms."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+normal_BMI_low_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #2: If you feel worse later today, use the system to take symptoms."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+normal_BMI_normal_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #1: Your measurements are fine today."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+normal_BMI_normal_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #2: If you feel worse later today, use the system to take symptoms."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+normal_BMI_high_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.high_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #2: If you feel worse later today, use the system to take symptoms."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+normal_BMI_high_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.high_BP($name, True)
+          healthcare.normal_weight($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #2: If you feel worse later today, use the system to take symptoms."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+#########################################################################################
+
+high_BMI_low_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.obese($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #5: Have someone drive you to the local Emergency Department or call 911 now."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+high_BMI_low_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.low_BP($name, True)
+          healthcare.obese($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #5: Have someone drive you to the local Emergency Department or call 911 now."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+high_BMI_normal_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.obese($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #3: Contact family dr. or go to the Emergency Department if you feel you should."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+high_BMI_normal_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.normal_BP($name, True)
+          healthcare.obese($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #3: Contact family dr. or go to the Emergency Department if you feel you should."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+high_BMI_high_BP_normal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.obese($name, True)
+          healthcare.high_BP($name, True)
+          check 60 <= $hr <= 100
+          $message = "Message #3: Contact family dr. or go to the Emergency Department if you feel you should."
+     assert
+          healthcare.n_hr($name, True)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)
+
+high_BMI_high_BP_abnormal_HR
+     foreach
+          healthcare.attributes_of($name, $weight, $height, $systolic, $diastolic, $hr)
+          healthcare.obese($name, True)
+          healthcare.high_BP($name, True)
+          check ($hr < 60) | ($hr > 100)
+          $message = "Message #3: Contact family dr. or go to the Emergency Department if you feel you should."
+     assert
+          healthcare.ab_hr($name, $hr)
+          healthcare.message($name, $weight, $height, $systolic, $diastolic, $hr, $message)

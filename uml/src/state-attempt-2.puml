@@ -1,0 +1,103 @@
+@startuml StateDiagram
+skinparam backgroundColor #EEEBDC
+skinparam ArrowColor SeaGreen
+
+title "Health Assessment Flowchart: Illustrating the Complexity of Maintaining Classical Expert Systems"
+start
+    :Measure attributes;
+
+if (BMI < 18.5) then (yes)
+    :Underweight;
+    if (BP <= 90/60) then (yes)
+        :Low BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #4;
+        else (no)
+            :Normal HR;
+            :Display Message #4;
+        endif
+    else if (90/60 < BP <= 120/80) then (yes)
+        :Normal BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #4;
+        else (no)
+            :Normal HR;
+            :Display Message #4;
+        endif
+    else (no)
+        :High BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #4;
+        else (no)
+            :Normal HR;
+            :Display Message #4;
+        endif
+    endif
+else if (18.5 <= BMI < 25) then (yes)
+    :Normal weight;
+    if (BP <= 90/60) then (yes)
+        :Low BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #2;
+        else (no)
+            :Normal HR;
+            :Display Message #2;
+        endif
+    else if (90/60 < BP <= 120/80) then (yes)
+        :Normal BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #2;
+        else (no)
+            :Normal HR;
+            :Display Message #1;
+        endif
+    else (no)
+        :High BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #2;
+        else (no)
+            :Normal HR;
+            :Display Message #2;
+        endif
+    endif
+else (no)
+        :Overweight;
+    if (BP <= 90/60) then (yes)
+        :Low BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #5;
+        else (no)
+            :Normal HR;
+            :Display Message #5;
+        endif
+    else if (90/60 < BP <= 120/80) then (yes)
+        :Normal BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #3;
+        else (no)
+            :Normal HR;
+            :Display Message #3;
+        endif
+    else (no)
+        :High BP;
+        if (HR < 60 or HR > 100) then (yes)
+            :Abnormal HR;
+            :Display Message #3;
+        else (no)
+            :Normal HR;
+            :Display Message #3;
+        endif
+    endif
+endif
+
+stop
+
+@enduml

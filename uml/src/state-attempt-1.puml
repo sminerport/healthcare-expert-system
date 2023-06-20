@@ -1,0 +1,12 @@
+@startuml
+[*] --> CalculateBMI
+CalculateBMI --> LowBMI : low BMI
+CalculateBMI --> NormalBMI : normal BMI
+CalculateBMI --> HighBMI : high BMI
+LowBMI --> AssertUnderweight : if Underweight
+NormalBMI --> AssertNormalWeight : if Normal weight
+HighBMI --> AssertObese : if Obese
+AssertUnderweight --> [*]
+AssertNormalWeight --> [*]
+AssertObese --> [*]
+@enduml
